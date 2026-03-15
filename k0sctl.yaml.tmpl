@@ -1,0 +1,26 @@
+apiVersion: k0sctl.k0sproject.io/v1beta1
+kind: Cluster
+metadata:
+  name: proxmox-k8s-cluster
+spec:
+  hosts:
+  - role: controller
+    ssh:
+      address: {{NODE0}}
+      user: ubuntu
+      keyPath: ~/.ssh/id_rsa
+  - role: worker
+    ssh:
+      address: {{NODE1}}
+      user: ubuntu
+      keyPath: ~/.ssh/id_rsa
+  - role: worker
+    ssh:
+      address: {{NODE2}}
+      user: ubuntu
+      keyPath: ~/.ssh/id_rsa
+  k0s:
+    config:
+      spec:
+        telemetry:
+          enabled: false # Optional: disable tracking
